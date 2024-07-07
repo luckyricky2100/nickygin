@@ -1,0 +1,93 @@
+definitions:
+  errcode.Error:
+    properties:
+      code:
+        description: 错误码
+        type: integer
+      details:
+        description: 详细信息
+        items:
+          type: string
+        type: array
+      msg:
+        description: 错误消息
+        type: string
+    type: object
+  web.APIError:
+    properties:
+      errorCode:
+        description: 错误码
+        type: integer
+      errorMessage:
+        description: 错误消息
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/{some_msg}:
+    get:
+      consumes:
+      - application/json
+      description: GetPage
+      parameters:
+      - description: Some Msg
+        in: path
+        name: some_msg
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/web.APIError'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/web.APIError'
+      summary: GetClass
+  /api/v1/classes:
+    post:
+      consumes:
+      - multipart/form-data
+      description: GetAllClasses
+      parameters:
+      - description: string
+        in: formData
+        name: title
+        type: string
+      - description: int
+        in: formData
+        name: parent_id
+        type: integer
+      - description: bool
+        in: formData
+        name: enable_to_memory
+        type: boolean
+      - description: string
+        in: header
+        name: token
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/errcode.Error'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/web.APIError'
+      summary: GetClass
+swagger: "2.0"

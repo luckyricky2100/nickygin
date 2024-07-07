@@ -1,0 +1,78 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server Petstore server.",
+        "title": "Swagger Example API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "petstore.swagger.io:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/api/v1/{some_msg}": {
+            "get": {
+                "description": "GetAllClasses",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "GetClass",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Some Msg",
+                        "name": "some_msg",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "We need ID!!",
+                        "schema": {
+                            "$ref": "#/definitions/web.APIError"
+                        }
+                    },
+                    "404": {
+                        "description": "Can not find ID",
+                        "schema": {
+                            "$ref": "#/definitions/web.APIError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "web.APIError": {
+            "type": "object",
+            "properties": {
+                "errorCode": {
+                    "description": "错误码",
+                    "type": "integer"
+                },
+                "errorMessage": {
+                    "description": "错误消息",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
